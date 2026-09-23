@@ -1,0 +1,43 @@
+{
+  "name": "movensa-chatbot",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "packageManager": "pnpm@10.30.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "supabase"
+    ],
+    "overrides": {
+      "esbuild": "0.28.1"
+    }
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @movensa/api --filter @movensa/web --filter @movensa/widget dev",
+    "build": "pnpm -r build",
+    "build:vercel:web": "pnpm --filter @movensa/widget build && pnpm --filter @movensa/web build && node scripts/prepare-vercel-web.mjs",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "check": "pnpm typecheck && pnpm test && pnpm build && pnpm db:verify",
+    "db:verify": "pnpm --filter @movensa/migration db:verify",
+    "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop",
+    "supabase:reset": "supabase db reset",
+    "migration:export": "pnpm --filter @movensa/migration run export",
+    "migration:preflight": "pnpm --filter @movensa/migration run preflight",
+    "migration:import": "pnpm --filter @movensa/migration run import",
+    "migration:verify": "pnpm --filter @movensa/migration run verify"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.1",
+    "supabase": "2.117.0",
+    "typescript": "7.0.2"
+  },
+  "dependencies": {
+    "fastify": "5.12.5"
+  }
+}

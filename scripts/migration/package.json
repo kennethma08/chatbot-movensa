@@ -1,0 +1,32 @@
+{
+  "name": "@movensa/migration",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "export": "tsx src/export.ts",
+    "preflight": "tsx src/validate-export.ts",
+    "import": "tsx src/import.ts",
+    "verify": "tsx src/verify.ts",
+    "onboard-users": "tsx src/onboard-users.ts",
+    "db:verify": "tsx src/verify-schema.ts",
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "0.5.8",
+    "@movensa/shared": "workspace:*",
+    "mssql": "12.7.2",
+    "msnodesqlv8": "5.5.0",
+    "postgres": "3.4.9",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/mssql": "12.3.0",
+    "@types/node": "26.6.1",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "vitest": "5.0.1"
+  }
+}

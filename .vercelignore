@@ -1,0 +1,13 @@
+.env
+.env.*.local
+.git
+.vercel
+node_modules
+coverage
+tmp
+apps/*/dist
+packages/*/dist
+scripts/migration/data
+supabase/.branches
+supabase/.temp
+

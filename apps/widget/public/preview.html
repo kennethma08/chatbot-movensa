@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vista previa · Grupo Movensa Webchat</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; color: #292521; background: #f6f4f1; font-family: Inter, system-ui, sans-serif; }
+      header { height: 70px; display: flex; align-items: center; padding: 0 6vw; background: #fff; border-bottom: 1px solid #e6e2dd; font-weight: 800; }
+      header i { color: #e87528; font-style: normal; }
+      main { width: min(1080px, 88vw); margin: 90px auto; }
+      p { color: #726c65; max-width: 550px; line-height: 1.65; }
+      .skeleton { margin-top: 50px; display: grid; grid-template-columns: 1.3fr .7fr; gap: 24px; }
+      .skeleton div { height: 260px; border-radius: 20px; border: 1px solid #e6e2dd; background: #fff; }
+    </style>
+    <script>
+      const json = (value) => Promise.resolve(new Response(JSON.stringify(value), { status: 200, headers: { 'content-type': 'application/json' } }));
+      window.fetch = (input, options) => {
+        const url = String(input);
+        if (url.includes('/bootstrap')) return json({ widget: { primaryColor: '#e87528', accentColor: '#fff1e8', backgroundColor: '#ffffff', textColor: '#292521', position: 'bottom-right', headerTitle: 'Equipo Grupo Movensa', welcomeText: 'Hola, estamos aquí para ayudarte.', placeholderText: 'Escribe tu mensaje…', bubbleText: '¿Necesitas ayuda?', brandText: 'Grupo Movensa', showBranding: true, allowFreeText: true, allowLiveChat: true, borderRadius: 20, content: { sections: { home: true, conversation: true, faqs: true, articles: true }, homePrimaryText: '¿En qué podemos ayudarte?', newConversationText: 'Iniciar conversación', quickLinks: [{ id: 'q1', title: 'Hablar con soporte', type: 'conversation', isActive: true }], faqCategories: [{ id: 'f1', name: 'General', isActive: true, questions: [{ id: 'p1', question: '¿Cuál es el horario?', answer: 'Atendemos de lunes a viernes, de 8:00 a 17:00.', isActive: true }] }], articleCategories: [{ id: 'a1', name: 'Primeros pasos', isActive: true, articles: [{ id: 'ar1', title: 'Cómo iniciar una solicitud', content: 'Abre la pestaña Chat y escribe el detalle de tu solicitud.', isActive: true }] }] } } });
+        if (url.endsWith('/sessions')) return json({ sessionKey: 'preview-session-key-1234567890', messages: [
+          { id: '1', sender: 'bot', message_type: 'text', content: '¡Hola! ¿En qué podemos ayudarte hoy?', created_at: new Date().toISOString() },
+          { id: '2', sender: 'visitor', message_type: 'text', content: 'Quiero conocer el estado de mi solicitud.', created_at: new Date().toISOString() },
+          { id: '3', sender: 'agent', message_type: 'text', content: 'Con gusto. Comparte el número de referencia y lo revisamos.', created_at: new Date().toISOString() }
+        ] });
+        if (url.includes('/messages') && options?.method === 'POST') return json({ messages: [] });
+        if (url.includes('/messages?')) return json({ status: 'active', messages: [] });
+        if (url.includes('/request-agent')) return json({ requested: true });
+        return json({});
+      };
+    </script>
+  </head>
+  <body>
+    <header>Grupo Movensa</header>
+    <main>
+      <small>PORTAL DE DEMOSTRACIÓN</small>
+      <h1>Una experiencia de atención integrada.</h1>
+      <p>Esta página existe sólo para la validación visual local del cliente embebible. No realiza solicitudes externas ni contiene datos reales.</p>
+      <div class="skeleton"><div></div><div></div></div>
+    </main>
+    <script src="/movensa-widget.js" data-key="preview-activation-key-1234567890" data-api-url="http://127.0.0.1:3100/v1" defer></script>
+  </body>
+</html>

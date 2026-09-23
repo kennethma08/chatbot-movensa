@@ -1,0 +1,40 @@
+export const sourceTables = [
+  'companies',
+  'profiles',
+  'contacts',
+  'users',
+  'conversations',
+  'messages',
+  'attachments',
+  'integrations',
+  'whatsapp_templates',
+  'bot_settings',
+  'received_messages',
+  'outbox_messages',
+  'whatsapp_bot_flows',
+  'whatsapp_bot_execution_states',
+  'webchatbot_flows',
+  'webchatbot_widgets',
+  'webchatbot_installation_keys',
+  'webchatbot_sessions',
+  'webchatbot_messages',
+  'webchatbot_events',
+  'company_ai_settings',
+  'company_ai_knowledge_items',
+  'ai_usage_logs',
+  'ai_conversation_logs',
+  'company_admin_audits',
+  'company_whatsapp_events',
+  'user_session_events',
+] as const;
+
+export type SourceTable = typeof sourceTables[number];
+
+export const importOrder: SourceTable[] = [
+  'companies', 'profiles', 'contacts', 'users', 'conversations', 'messages', 'attachments',
+  'integrations', 'whatsapp_templates', 'bot_settings', 'received_messages', 'outbox_messages',
+  'whatsapp_bot_flows', 'whatsapp_bot_execution_states', 'webchatbot_flows', 'webchatbot_widgets',
+  'webchatbot_installation_keys', 'webchatbot_sessions', 'webchatbot_messages', 'webchatbot_events',
+  'company_ai_settings', 'company_ai_knowledge_items', 'ai_usage_logs', 'ai_conversation_logs',
+  'company_admin_audits', 'company_whatsapp_events', 'user_session_events',
+];
